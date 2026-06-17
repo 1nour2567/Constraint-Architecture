@@ -75,8 +75,8 @@ Category & Count & Key Detail \\
 \midrule
 ABCs (abstract classes) & 7 & Shell, Identity, Scheduler, Memory, Protocol, \newline Tools, + 4 constraint-layer ABCs \\
 Protocols (duck-typing) & 7 & One per ABC \\
-Frozen dataclasses & 10 of 12 & \texttt{\_\_post_init\_\_} validates risk\_score (0--9), prev\_hash \\
-Custom exceptions & 4 & VetoError (reason+alternative+ref), ExecutionRefused, AuditIntegrity \\
+Frozen dataclasses & 10 of 12 & \verb|__post_init__| validates \verb|risk_score| (0--9), \verb|prev_hash| \\
+Custom exceptions & 4 & \verb|VetoError| (reason+alternative+ref), \verb|ExecutionRefused|, \verb|AuditIntegrity| \\
 Enums & 4 & Tier(3), EventType(8), MemoryLevel(3) \\
 Self-checks & 25 & ABC instantiation, frozen immutability, value bounds \\
 \addlinespace
