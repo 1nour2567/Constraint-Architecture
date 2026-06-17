@@ -66,18 +66,22 @@ The skeleton exposes 7~ABCs, 7~Protocols, 10~frozen dataclasses,
 
 \begin{table}[h]
 \centering
-\caption{Engineering properties of \texttt{constraint-architecture} v1.5.0.}
-\begin{tabular}{lr}
+\caption{Skeleton v1.5.0 engineering properties.}
+\begin{tabular}{lrl}
 \toprule
-Property & Value \\
+Category & Count & Key Detail \\
 \midrule
-ABCs (abstract classes) & 7 (Shell, Identity, Scheduler, Memory, Protocol, Tools + 4 constraint ABCs) \\
-Protocols (duck-typing) & 7 (one per ABC) \\
-Frozen dataclasses & 10 of 12 total \\
-Custom exceptions & 4 (VetoError carries reason + alternative + ref) \\
-Enums & 4 (Tier 3, EventType 8, MemoryLevel 3) \\
-Automated self-checks & 25 (ABC instantiation, frozen immutability, bounds) \\
-Lines / Dependencies / Python & 1384 / 0 / 3.10+ \\
+ABCs (abstract classes) & 7 & Shell, Identity, Scheduler, Memory, Protocol, Tools, \\
+   &    & \quad + 4 constraint-layer ABCs \\
+Protocols (duck-typing) & 7 & One per ABC \\
+Frozen dataclasses & 10 of 12 & \texttt{\_\_post_init\_\_} validates risk\_score (0--9), prev\_hash \\
+Custom exceptions & 4 & VetoError (reason+alternative+ref), ExecutionRefused, AuditIntegrity \\
+Enums & 4 & Tier(3), EventType(8), MemoryLevel(3) \\
+Self-checks & 25 & ABC instantiation, frozen immutability, value bounds \\
+\addlinespace
+Lines of Python & 1384 & \\
+Dependencies & 0 & \\
+Python & 3.10+ & \\
 \bottomrule
 \end{tabular}
 \end{table}
