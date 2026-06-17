@@ -71,8 +71,7 @@ The skeleton exposes 7~ABCs, 7~Protocols, 10~frozen dataclasses,
 \toprule
 Category & Count & Key Detail \\
 \midrule
-ABCs (abstract classes) & 7 & Shell, Identity, Scheduler, Memory, Protocol, Tools, \\
-   &    & \quad + 4 constraint-layer ABCs \\
+ABCs (abstract classes) & 7 & Shell, Identity, Scheduler, Memory, Protocol, \newline Tools, + 4 constraint-layer ABCs \\
 Protocols (duck-typing) & 7 & One per ABC \\
 Frozen dataclasses & 10 of 12 & \texttt{\_\_post_init\_\_} validates risk\_score (0--9), prev\_hash \\
 Custom exceptions & 4 & VetoError (reason+alternative+ref), ExecutionRefused, AuditIntegrity \\
@@ -140,7 +139,7 @@ The AAAI-27 demo is self-contained---attendees run it on their own laptops.
 \end{enumerate}
 
 Video demonstrates that ``LLM reasons; code decides'' is not a
-whitepaper---it is install-and-subclass code.
+whitepaper---it is install-and-subclass code.  (Video: {\tt \url{https://github.com/1nour2567/Constraint-Architecture}})
 
 %------------------------------------------------------------------------
 \section{Related Work}
@@ -165,7 +164,6 @@ the shared invariant afterwards.  The result---\texttt{pip install
 constraint-architecture}---is a reference skeleton, not a whitepaper.
 
 \newpage
-\bibliographystyle{aaai}
 \begin{thebibliography}{}
 
 \bibitem[Andriushchenko et al., 2025]{andriushchenko2025}
