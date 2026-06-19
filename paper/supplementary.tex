@@ -10,8 +10,8 @@
 \frenchspacing
 \usepackage[margin=1in]{geometry}
 
-\title{Supplementary Material: Red-Team Test Cases, Benchmarks, and Reproducibility\\
-       {\small Constraint Architecture v1.5.0 --- AAAI-27 Demo Track}}
+\title{Supplementary Material: Red-Team Test Cases, Benchmarks, Ablation, and Reproducibility\\
+       {\small Constraint Architecture v1.5.1 --- AAAI-27 Demo Track}}
 
 \author{Xu Renwu (续仁舞) \quad Huaqiao University \quad 1nour2567@gmail.com}
 \date{}
@@ -56,6 +56,17 @@ Without the regex path, those 3 attacks would have reached the sandbox.
 
 \textbf{Reproducibility.} All 16 attack payloads and the 149-test suite are
 available at \url{https://github.com/1nour2567/kylin-agent}.
+
+\textbf{Ablation estimates.} Based on attack-log analysis, we estimate each
+layer's marginal contribution: removing T0 (injection detection) exposes the
+LLM to all 4 obfuscated payloads (hex, base64, Unicode, overflow), raising
+estimated breach rate from 0/16 to $\geq$4/16.  Removing T2 (dual-path
+validation) allows the 3 attacks caught by regex-only mismatch (role
+escalation, tool-parameter crafting, multi-turn poisoning) to reach T3,
+raising estimated breach rate to 3/16.  Removing T4 (audit chain) eliminates
+replay-attack detection.  No combination of three or fewer layers catches all 16
+attacks.  These estimates are directionally sound but await formal head-to-head
+measurement in a controlled A/B deployment.
 
 \section{Performance Benchmarks}
 

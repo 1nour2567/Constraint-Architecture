@@ -26,18 +26,19 @@
 \begin{abstract}
 Recent work (LGA, SARC, CAAF, ePCA) establishes multi-layer deterministic
 governance as the emerging standard for agent safety.  We build on this
-direction with three contributions specific to \textit{reverse extraction from
-practice}: (1)~Cross-domain structural validation---two independently built,
-fully functional agent systems in unrelated domains (security ops and embodied
-music) converged on the same four-layer architecture and four structural
-invariants without shared code or design docs.  (2)~Reverse-extraction
-methodology---every existing framework derives layers from theory; we extracted
-the invariant \textit{after} discovering it in production.  (3)~An
-engineering-grade artifact---\texttt{pip install constraint-architecture}: zero
-dependencies, 7~ABCs + 7~Protocols, 10~frozen dataclasses, 25~automated
-self-checks.  \textbf{Demo:} \texttt{python -m constraint\_architecture.demo}
-demonstrates three commands through a live constraint engine in under one
-second, with no configuration.
+direction with three contributions: (1)~Cross-domain structural convergence---two
+agent systems in unrelated domains (security ops, embodied music), built by the
+same developer without shared code, converged on the same four-layer
+architecture and four structural invariants.  We do not claim true independence;
+we report the convergence as post-hoc evidence that the architecture may capture
+a real engineering invariant.  (2)~An engineering-grade artifact---\texttt{pip
+install constraint-architecture} (v1.5.1): zero dependencies, 1384~lines of
+Python, 7~ABCs + 7~Protocols, 10~frozen dataclasses with
+\texttt{\_\_post\_init\_\_} value-bound enforcement, 25~automated self-checks.
+(3)~Ablation-validated layering---attack-log analysis shows each of the four
+constraint layers catches attacks the others miss.  \textbf{Demo:} \texttt{python
+-m constraint\_architecture.demo} executes three commands through a live
+constraint engine with zero configuration.
 \end{abstract}
 
 %------------------------------------------------------------------------
@@ -47,36 +48,47 @@ second, with no configuration.
 Recent work---LGA \cite{ge2026}, SARC \cite{besanson2026}, CAAF \cite{li2026},
 ePCA \cite{yang2026}, and the IETF ASA draft \cite{baysal2026}---has established
 that multi-layer deterministic governance is the right direction for agent
-safety.  We build on this direction but make three contributions specific to
-\textit{reverse extraction from practice}:
+safety.  We build on this work.  Our skeleton instantiates four deterministic
+layers:
 
 \begin{enumerate}
-\item \textbf{Cross-domain structural validation.}
-Two fully functional agent systems---Kylin-Agent (security ops on Kylin OS V11,
-16 red-team attacks, 0 breaches) and Malio (embodied AI music, 800 particles,
-9 physics systems)---were built independently, without shared code or design
-docs.  After completion, both were found to share the same four-layer structure
-and four structural invariants: append-only constraint store, tiered execution
-with a confirm middle tier, prev\_hash-chained audit events, and role
-enforcement at the code layer.
-\item \textbf{Reverse-extraction methodology.}
-Every existing framework derives layers from theory and validates on benchmarks.
-We are the only work that extracted the invariant \textit{after} building
-production systems.  If the same architecture emerges from unrelated domains
-that share no common ancestor, it is likely capturing a real engineering
-invariant rather than a design preference.
-\item \textbf{Engineering-grade artifact, not a whitepaper.}
-The result is \texttt{pip install constraint-architecture}: zero dependencies,
-1384~lines of Python, 7~ABCs + 7~Protocols, 10~frozen dataclasses with
-\texttt{\_\_post\_init\_\_} validation, 4~custom exceptions with structured
-fields, and 25~automated self-checks.  Architectural commitments (immutability,
-monotonic constraints, mandatory audit prev\_hash) are enforced at the code
-level---not documented in a figure.
+\item \textbf{Reasoning} --- LLM proposes actions; cannot execute or bypass layers.
+\item \textbf{Constraints} --- Deterministic validation. Rules are append-only
+      (tightened, never removed). Violations raise \texttt{VetoError}
+      (structured \texttt{reason}/\texttt{alternative}/\texttt{ref}).
+\item \textbf{Execution} --- Tiered: \texttt{AUTO} (read-only),
+      \texttt{CONFIRM} (human approval), \texttt{VETO} (never executable).
+      Role enforcement at the code layer.
+\item \textbf{Audit} --- Immutable SHA256 hash chain with mandatory
+      \texttt{prev\_hash} on every \texttt{AuditEvent}.
 \end{enumerate}
 
-Key design invariant: \textbf{constraint monotonicity}---base rules never
-decrease. ``Relaxed'' mode means fewer additional restrictions, never weaker
-baselines.
+\textbf{What distinguishes this instantiation.}
+(1)~\textit{Post-hoc structural convergence.} Two fully functional agent
+systems---Kylin-Agent (security ops on Kylin OS V11) and Malio (embodied AI
+music, 800 particles)---were built by the same developer without shared code or
+design docs.  After completion, both were discovered to share the same four
+layers and four invariants: append-only constraint store, tiered execution with
+confirm middle tier, prev\_hash-chained audit, and code-layer role enforcement.
+We explicitly note that single-developer authorship is not a true independence
+test; the convergence is suggestive, not dispositive.  A third reference
+implementation by an independent team would provide stronger evidence, and the
+pip-installable skeleton is designed to lower that barrier.
+
+(2)~\textit{Engineering-grade artifact.} The result is not a whitepaper---it is
+\texttt{pip install constraint-architecture} (v1.5.1): zero dependencies, 7~ABCs
++ 7~Protocols, 10~frozen dataclasses with \texttt{\_\_post\_init\_\_} validation,
+4~custom exceptions with structured fields, and 25~automated self-checks.
+Architectural commitments are enforced at the code level---frozen dataclasses
+prevent veto flipping, \texttt{\_\_post\_init\_\_} bounds \texttt{risk\_score}
+to 0--9, \texttt{AuditEvent} requires \texttt{prev\_hash} at construction.
+
+(3)~\textit{Ablation-validated layering.} Attack-log analysis provides
+per-layer contribution estimates (see Supplementary Material): removing T0
+exposes the LLM to all obfuscated payloads; removing T2 allows 3 of 16 attacks
+(largely tool-parameter crafting and role escalation) to reach the sandbox;
+removing T4 eliminates audit-chain replay detection. Each layer catches
+attacks the others miss.  The four are not redundant.
 
 %------------------------------------------------------------------------
 \section{Engineering Properties}
@@ -87,7 +99,7 @@ The skeleton exposes 7~ABCs, 7~Protocols, 10~frozen dataclasses,
 
 \begin{table}[h]
 \centering
-\caption{Skeleton v1.5.0 engineering properties.}
+\caption{Skeleton v1.5.1 engineering properties.}
 \begin{tabular}{lrl}
 \toprule
 Category & Count & Key Detail \\
@@ -131,8 +143,12 @@ PersonaEngine enforces a central-bank emotional currency model: no code can
 directly modify \texttt{energy}/\texttt{warmth}/\texttt{playfulness}.
 The same four layers manifest as: MusicAgent reasoning $\rightarrow$ PersonaBounds
 constraints $\rightarrow$ core\_action push with role filtering $\rightarrow$
-federated SBERT-signed audit.  Full attack taxonomy and benchmarks are provided
-as 1-page supplementary material.
+federated SBERT-signed audit.  In one concrete test, the MusicAgent proposed a
+\texttt{light\_burst} (a high-energy visual effect) while the persona's energy
+was at 0.2.  The LLM, unconstrained, would have executed the action.  The
+PersonaEngine vetoed it deterministically---the LLM did not self-censor, nor
+could it override the bounds.  Full attack taxonomy and benchmarks are in a
+1-page supplementary.
 
 %------------------------------------------------------------------------
 \section{Demo Plan \& Video Outline}
