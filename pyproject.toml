@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "constraint-architecture"
-version = "1.5.0"
+version = "1.5.1"
 description = "LLM reasons. Code decides what's allowed. Audit keeps it traceable."
 readme = "README.md"
 license = {text = "MIT"}
