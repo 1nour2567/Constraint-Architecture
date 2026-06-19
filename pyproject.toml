@@ -38,10 +38,11 @@ requires-python = ">=3.10"
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/1nour2567/kylin-agent"
-Documentation = "https://github.com/1nour2567/kylin-agent/blob/master/CONSTRAINT_EN.md"
-"Bug Reports" = "https://github.com/1nour2567/kylin-agent/issues"
-Source = "https://github.com/1nour2567/kylin-agent"
+Homepage = "https://github.com/1nour2567/Constraint-Architecture"
+Documentation = "https://github.com/1nour2567/Constraint-Architecture/blob/main/CONSTRAINT_EN.md"
+"Bug Reports" = "https://github.com/1nour2567/Constraint-Architecture/issues"
+Source = "https://github.com/1nour2567/Constraint-Architecture"
+"Demo (One Click)" = "https://github.com/1nour2567/Constraint-Architecture#readme"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
