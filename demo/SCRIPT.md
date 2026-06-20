@@ -11,7 +11,7 @@
 画面：终端，已 cd 到某个空目录
 
 你说：
-"This is Constraint Architecture v1.5.0.
+"This is Constraint Architecture v1.5.1.
 pip-installable agent safety skeleton.
 Zero dependencies. Python 3.10+."
 
@@ -33,11 +33,11 @@ pip install constraint-architecture
 
 ## [0:40-2:00] 写规则
 
-画面：打开 demo/demo.py（我已经帮你写好了，在 constraint-architecture/demo/demo.py）
+画面：打开 demo/demo.py
 
 你指着 class SystemGuard(ConstraintEngine) 那几行：
 
-"Four lines. I just wrote a safety layer."
+"Three constraint branches. I just wrote a safety layer."
 指着 "rm -rf" 那行：
 "This rule cannot be bypassed. Not by prompt engineering.
  Not by roleplay. Not by multi-turn pressure.
