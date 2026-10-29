@@ -1,8 +1,14 @@
 # Constraint Architecture
 
+[![PyPI](https://img.shields.io/badge/PyPI-constraint--architecture-3775A9?logo=pypi&logoColor=white)](https://pypi.org/project/constraint-architecture/)
+
 **LLM reasons. Code decides. Audit ensures non-repudiation.**
 
 A production-grade, domain-agnostic Agent architecture extracted from two independent reference implementations spanning security operations (Kylin-Agent) and embodied AI (Malio). Four constraint layers (T0–T4), none of which depend on the LLM.
+
+```bash
+pip install constraint-architecture    # v1.5.1 on PyPI
+```
 
 ## Architecture
 
