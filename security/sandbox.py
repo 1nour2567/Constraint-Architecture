@@ -105,12 +105,23 @@ def execute_restricted(command: str, timeout: int = 30) -> Tuple[int, str, str]:
 
 
 def can_execute_as_agent(command: str) -> bool:
-    """Check if a command is in the execution allowlist (auto or confirm tier)."""
+    """Check if a command is in the execution allowlist (auto or confirm tier).
+
+    Accepts either an LLM tool name (``ps_processes``) or a bare sandbox
+    command name (``ps``). ``exec_tier_for`` only understands the former, so a
+    bare name is resolved against the manifest and accepted only when it maps
+    to exactly one tool.
+    """
     base = command.strip().split()[0] if command.strip() else ""
     entry = lookup_by_llm_name(base)
-    sandbox_cmd = entry["name"] if entry else base
-    tier = exec_tier_for(sandbox_cmd)
-    return tier in ("auto", "confirm")
+    if entry:
+        return entry.get("exec_tier") in ("auto", "confirm")
+    if base in ALLOWED_READ_ONLY:
+        from agent.tools_manifest import MANIFEST
+
+        matches = [item for item in MANIFEST if item.get("name") == base]
+        return len(matches) == 1 and matches[0].get("exec_tier") in ("auto", "confirm")
+    return False
 
 
 def resolve_cmd(command_str: str) -> str:

@@ -16,7 +16,7 @@ from security.constraints import ConstraintEngine
 
 
 CORPUS_PATH = os.path.join(
-    os.path.dirname(__file__), "..", "data", "jailbreak_corpus.json"
+    os.path.dirname(__file__), "data", "jailbreak_corpus.json"
 )
 
 
