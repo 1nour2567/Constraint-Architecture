@@ -173,7 +173,7 @@ Constraint Architecture 目前有两个参考实现，各自强调约束的不�
 | **Constraints** | 安全规则 + 三级角色权限 + 动态安全姿态 + Intent Profile 行为分析 | Persona 三维约束 + DSL 规则引擎 + VisualAgent 规则治理 |
 | **Execution** | auto/confirm/veto 三级 + sudo 降权 + 确认队列持久化 | VisualAgent 规则评估 + 粒子渲染 + Feedback 推送 |
 | **Audit** | SHA256 链式哈希，不可篡改，_seed_from_disk 重启不断链 | 轻量版：规则健康反馈闭环（OODA），确保约束运行时持续修正，但不具有密码学不可抵赖性 |
-| **验证** | 麒麟 V11 真机部署·135 tests·16 次红队攻击 0 打穿 | 800 粒子 9 大物理系统·75 tests·Proactive Heartbeat |
+| **验证** | 麒麟 V11 真机部署·89 个结构性测试 | 800 粒子 9 大物理系统·63 个确定性断言·Proactive Heartbeat |
 
 Kylin-Agent 的 Constraint 层深在身份、权限、规则覆盖、防篡改审计。Malio 的 Constraint 层深在人格边界、规则治理、语义聚类、自主行为的信任演化。Malio 的 Layer 4 是轻量版——它没有密码学审计，但 OODA 反馈闭环确保规则在运行时持续评估（死规则归档、冲突降级、hits 评分），这本身是对"约束有效"的一种可验证保证。
 

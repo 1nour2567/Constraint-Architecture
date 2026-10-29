@@ -29,14 +29,14 @@ T0 Anti-Injection  →  T1 Risk Scoring  →  T2 Dual-Path Validation  →  T3 S
 
 ## Provenance
 
-- **Kylin-Agent** — Security ops agent on Kylin V11. 16 red-team attacks, 0 penetrations. 149 tests.
-- **Malio** — Embodied AI music agent. 800 particles, 9 physics systems. IUI 2027 submission.
+- **Kylin-Agent** — Security ops agent on Kylin V11 (中国软件杯 competition entry). 89 structural tests covering injection, privilege, and audit-chain cases.
+- **Malio** — Embodied AI music agent. 800 particles, 9 physics systems. 75 assertions (63 deterministic).
 
 Two entirely different domains. Same architecture.
 
 ## Author
 
-Xu Renwu (续仁舞). Grounded Cognition Lab. Jan–May 2026.
+Xu Renwu (续仁舞). Independent work. Jan–May 2026.
 
 ## License
 

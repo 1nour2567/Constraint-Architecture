@@ -134,7 +134,7 @@ The point isn't "LLM says something and code rubber-stamps it." Code draws a lin
 | **Constraints** | Security rules + 3-tier role + dynamic posture + Intent Profile | Persona 3D constraints + DSL rule engine + VisualAgent governance |
 | **Execution** | auto/confirm/veto + sudo -n + persistent confirm queue | VisualAgent rule evaluation + particle rendering + Feedback push |
 | **Audit** | SHA256 chain, immutable, _seed_from_disk restart recovery | Lightweight: OODA rule feedback loop for continuous constraint health |
-| **Verification** | Kylin V11 deployment · 149 tests · 16 red-team attacks, 0 penetrations | 800 particles, 9 physics systems · 75 tests · Proactive Heartbeat |
+| **Verification** | Kylin V11 deployment · 89 structural tests | 800 particles, 9 physics systems · 63 deterministic assertions · Proactive Heartbeat |
 
 Kylin-Agent's constraint layer is deep in identity, permissions, rule coverage, and tamper-proof audit. Malio's constraint layer is deep in persona boundaries, rule governance, semantic clustering, and trust evolution for autonomous behavior. Malio's Layer 4 is lightweight — it lacks cryptographic non-repudiation, but the OODA feedback loop ensures rules are continuously evaluated at runtime (dead rule archiving, conflict downgrading, hits scoring), which is itself a verifiable guarantee of constraint health.
 
