@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "constraint-architecture"
+version = "1.5.2"
+description = "LLM reasons. Code decides what's allowed. Audit keeps it traceable."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Xu Renwu", email = "1nour2567@gmail.com" }]
+keywords = ["llm", "agent", "ai-safety", "guardrails", "constraint", "security"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://github.com/1nour2567/Constraint-Architecture"
+Source = "https://github.com/1nour2567/Constraint-Architecture"
+Documentation = "https://github.com/1nour2567/Constraint-Architecture/blob/master/CONSTRAINT_EN.md"
+"Bug Reports" = "https://github.com/1nour2567/Constraint-Architecture/issues"
+
+[tool.setuptools]
+packages = ["constraint_architecture", "constraint_architecture.demo"]
